@@ -4,5 +4,25 @@
 // but you don't so you're going to write it from scratch:
 
 var stringifyJSON = function(obj) {
-  // your code goes here
+  var result = '';
+
+  var toJSONstring = function(obj) {
+    if (typeof obj === 'number' || typeof obj === 'boolean' || obj === null) {
+      result += obj;
+    }
+    if (typeof obj === 'string') {
+      result += '\"' + obj + '\"';
+    }
+    if (Array.isArray(obj)) {
+      if (obj.length > 0) {
+        for (var i = 0; i < obj.length; i++) {
+          result += '[' + toJSONstring(obj[i]) + ']';
+        }
+      } else {
+        result += '[]';
+      }
+    }
+  };
+  toJSONstring(obj);
+  return result;
 };
